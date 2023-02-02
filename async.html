@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="icon" type="image/x-icon" href="./my sketch logo red transpt.png">
+    <link rel="stylesheet" href="./all.css">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./bootstrap.css">
+</head>
+<body class="" style="background:rgb(15, 13, 18) ;" onload="getLocation()">
+    <section class="parent d-flex gap-3">
+        <div class="sideNav text-center">
+            <button class="" style="color:skyblue; margin-bottom: 70px;"><i class="fa fa-cloud"></i></button>
+            <div><button class=""><i class="fa fa-bars"></i></button><br><label for="">Weather</label></div>
+            <div><button class=""><i class="fa fa-bars"></i></button><br><label for="">Cities</label></div>
+            <div><button class=""><i class="fa fa-map-location"></i></button><br><label for="">Map</label></div>
+            <div><button class=""><i class="fa fa-bars"></i></button><br><label for="">Settings</label></div>
+            
+        </div>
+        <div>
+            <div class="input" ><input placeholder="Search for cities" type="text"></div>
+            <div class="p-3 navbar">
+                <div class="text-light d-block w-50">
+                    <div id="myLocation" class="fs-1 fw-semibold">Ogbomoso</div>
+                    <h1 id="" class="mt-3 display-1 fw-bold">31⁰ </h1>
+                </div>
+                <div class="sunCon w-50">
+                    <img src="./sun.png" alt="" class="sun">
+                </div>
+            </div>
+    
+            <div class="text-light child-con">
+                <h5 class="fw-bold p-3">WEATHER FORECAST</h5>
+                <div class="p-3 forecast-Container d-md-flex d-sm-flex d-lg-flex">
+                    <div class="forecast">
+                        <p id="">Sunny</p>
+                        <img src="./cloud.png" alt="" class="cloud">
+                        <div class="fs-3 fw-bold" id="">31⁰</div>
+                    </div>
+                    <div class="forecastBorder"></div>
+                    <div class="forecast">
+                        <p id="">Cloudy</p>
+                        <img src="./cloud.png" alt="" class="cloud">
+                        <div class="fs-3 fw-bold" id="">31⁰</div>
+                    </div>
+                    <div class="forecastBorder"></div>
+                    <div class="forecast">
+                        <p id="">Rainy</p>
+                        <img src="./cloud.png" alt="" class="cloud">
+                        <div class="fs-3 fw-bold" id="">31⁰</div>
+                    </div>
+                    
+                    <div class="forecastBorder"></div>
+                    <div class="forecast">
+                        <p id="">Storm</p>
+                        <img src="./cloud.png" alt="" class="cloud">
+                        <div class="fs-3 fw-bold" id="">31⁰</div>
+                    </div>
+                    <div class="forecastBorder"></div>
+                    <div class="forecast">
+                        <p id="">Temperature</p>
+                        <img src="./cloud.png" alt="" class="cloud">
+                        <div class="fs-3 fw-bold" id="">31⁰</div>
+                    </div>
+                    <div class="forecastBorder"></div>
+                    <div class="forecast">
+                        <p id="">Humidity</p>
+                        <img src="./cloud.png" alt="" class="cloud">
+                        <div class="fs-3 fw-bold" id="">31⁰</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- <div class="loadingDiv">
+        <div id="loadingDiv" class=""></div>
+    </div> -->
+    
+    <div id="display"></div>  
+    <button onclick="getWeather()">Get Weather Details</button>
+
+
+    <script>
+        //.then()
+        let endpoint = "https://jsonplaceholder.typicode.com/users"
+        // const getData = async()=>{
+        //    let response =  await fetch(endpoint)
+        //    let convertedResponse = await response.json()
+        //    console.log(convertedResponse)
+        // }
+        //try and catch - ... Throw
+        const getData = ()=>{
+            
+            fetch(endpoint)
+            .then((response)=>response.json())
+            .then((convertedResponse)=>{
+                console.log(convertedResponse)
+                loadingDiv.innerHTML = ""
+                convertedResponse.map((eachItem)=>{
+                    display.innerHTML += `<h1>${eachItem.name}</h1>`
+                })
+            })
+            .catch((err)=>{
+                console.log(err)
+            })
+        }
+        let cityName = "Lagos"
+        let apiKey = "09756d60b2011a99fb389f6e43e766cc"
+        let endpoint2 = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=metric`
+        
+        const getWeather = ()=>{
+            fetch(endpoint2)
+            .then((response)=>response.json())
+            .then((convertedResponse)=>{
+                console.log(convertedResponse)
+            })
+        }
+       
+        const getLocation = ()=>{
+            loadingDiv.innerHTML = `<img src='loading.gif' class="gif"/>`
+            navigator.geolocation.getCurrentPosition((location)=>{
+                console.log(location)
+                let latitude = location.coords.latitude
+                let longitude = location.coords.longitude
+                console.log(latitude,longitude)
+
+
+                let endpoint3 = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}`
+                fetch(endpoint3)
+                .then((response)=>response.json())
+                .then((convertedResponse)=>{
+                    console.log(convertedResponse)
+                    myLocation.innerHTML = `<h1>${convertedResponse.name}</h1>`
+                    loadingDiv.innerHTML=""
+                })
+            })
+        };
+
+    </script>
+    <script src="./all.js"></script>
+    <script src="./bootstrap.bundle.js"></script>
+</body>
+</html>
