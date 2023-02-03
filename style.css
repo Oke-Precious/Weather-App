@@ -87,7 +87,7 @@ body{
     
 }
 .cloud{
-    width: 100%;
+    width: 150px;
 }
 .forecast-Container{
     /* display: flex; */
@@ -112,6 +112,7 @@ body{
 }
 .sideNav div{
     margin-bottom: 20px;
+    width: 100%;
 }
 .sideNav button{
     color:white;
@@ -120,7 +121,22 @@ body{
 
     background-color: transparent;
 }
-
+.sideNav div:hover{
+    background-color: rgb(53, 48, 48);
+}
+.offcanvasbtn{
+    background-color: rgb(92, 85, 99);
+    border:0;
+    padding:10px 15px;
+    border-radius:10px ;
+    color: white;
+}
+.ofcanvas-con{
+    background-color: rgb(92, 85, 99);
+    height: 100vh;
+    color: white;
+    
+}
 @media screen and (max-width: 700px){
     .forecastBorder{
         display: none;

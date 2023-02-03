@@ -12,20 +12,40 @@
 </head>
 <body class="" style="background:rgb(15, 13, 18) ;" onload="getLocation()">
     <section class="parent d-flex gap-3">
-        <div class="sideNav text-center">
-            <button class="" style="color:skyblue; margin-bottom: 70px;"><i class="fa fa-cloud"></i></button>
-            <div><button class=""><i class="fa fa-bars"></i></button><br><label for="">Weather</label></div>
-            <div><button class=""><i class="fa fa-bars"></i></button><br><label for="">Cities</label></div>
-            <div><button class=""><i class="fa fa-map-location"></i></button><br><label for="">Map</label></div>
-            <div><button class=""><i class="fa fa-bars"></i></button><br><label for="">Settings</label></div>
-            
-        </div>
+        
+        
         <div>
-            <div class="input" ><input placeholder="Search for cities" type="text"></div>
+            <div class="d-flex w-100 gap-2">
+                <div>
+                    <button class=" offcanvasbtn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions"
+                        aria-controls="offcanvasWithBothOptions"><i class="fa fa-bars"></i></button>
+                
+                    <div class="offcanvas w-25 offcanvas-start " data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions"
+                        aria-labelledby="offcanvasWithBothOptionsLabel">
+                        <div class="ofcanvas-con ">
+                            <div class="offcanvas-header ">
+                                <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel"></h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                            </div>
+                            <div class="offcanvas-body">
+                                <div class="sideNav text-center">
+                                    <button class="" style="color:skyblue; margin-bottom: 70px;"><i class="fa fa-cloud"></i></button>
+                                    <div><button  data-bs-dismiss="offcanvas" class=""><i class="fa fa-bars"></i></button><br><label for="">Weather</label></div>
+                                    <div><button  data-bs-dismiss="offcanvas" class=""><i class="fa fa-bars"></i></button><br><label for="">Cities</label></div>
+                                    <div><button  data-bs-dismiss="offcanvas" class=""><i class="fa fa-map-location"></i></button><br><label for="">Map</label></div>
+                                    <div><button  data-bs-dismiss="offcanvas" class=""><i class="fa fa-bars"></i></button><br><label for="">Settings</label></div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="input w-100" ><input placeholder="Search for cities" type="text" id="userCity" onkeydown="weather()"></div>
+            </div>
             <div class="p-3 navbar">
                 <div class="text-light d-block w-50">
-                    <div id="myLocation" class="fs-1 fw-semibold">Ogbomoso</div>
-                    <h1 id="" class="mt-3 display-1 fw-bold">31⁰ </h1>
+                    <div id="myLocationDisplay" class="fs-1 fw-semibold"></div>
+                    <h1 id="temperature" class="mt-3 display-1 fw-bold text-warning"> </h1>
                 </div>
                 <div class="sunCon w-50">
                     <img src="./sun.png" alt="" class="sun">
@@ -34,42 +54,43 @@
     
             <div class="text-light child-con">
                 <h5 class="fw-bold p-3">WEATHER FORECAST</h5>
-                <div class="p-3 forecast-Container d-md-flex d-sm-flex d-lg-flex">
+                <div class="p-3 justify-content-between  forecast-Container d-md-flex d-sm-flex d-lg-flex">
                     <div class="forecast">
-                        <p id="">Sunny</p>
-                        <img src="./cloud.png" alt="" class="cloud">
-                        <div class="fs-3 fw-bold" id="">31⁰</div>
+                        <p id="">Location</p>
+                        <div class="w-100"><img src="./Map-Marker-Marker-Inside-Azure.webp" alt="" class="cloud"></div>
+                        <div class="fs-5 text-warning" id="locate"></div>
                     </div>
                     <div class="forecastBorder"></div>
                     <div class="forecast">
-                        <p id="">Cloudy</p>
-                        <img src="./cloud.png" alt="" class="cloud">
-                        <div class="fs-3 fw-bold" id="">31⁰</div>
-                    </div>
-                    <div class="forecastBorder"></div>
-                    <div class="forecast">
-                        <p id="">Rainy</p>
-                        <img src="./cloud.png" alt="" class="cloud">
-                        <div class="fs-3 fw-bold" id="">31⁰</div>
-                    </div>
-                    
-                    <div class="forecastBorder"></div>
-                    <div class="forecast">
-                        <p id="">Storm</p>
-                        <img src="./cloud.png" alt="" class="cloud">
-                        <div class="fs-3 fw-bold" id="">31⁰</div>
+                        <p id="">Description</p>
+                        <div class="w-100"><img src="./cloud.png" alt="" class="cloud"></div>
+                        <div class="fs-5 text-warning" id="descript"></div>
                     </div>
                     <div class="forecastBorder"></div>
                     <div class="forecast">
                         <p id="">Temperature</p>
-                        <img src="./cloud.png" alt="" class="cloud">
-                        <div class="fs-3 fw-bold" id="">31⁰</div>
+                        <div class="w-100"><img src="./temperature.webp" alt="" class="cloud"></div>
+                        <div class="fs-5 text-warning" id="temper"></div>
+                    </div>
+                    
+                    <div class="forecastBorder"></div>
+                    <div class="forecast">
+                        <p id="">Wind Speed</p>
+                        <img src="./wind speed.webp" alt="" class="cloud">
+                        <div class="fs-5 text-warning" id="wind"></div>
+                    </div>
+                    <div class="forecastBorder"></div>
+                    <div class="forecast">git init
+                        
+                        <p id="">Pressure</p>
+                        <img src="./Barometer.webp" alt="" class="cloud">
+                        <div class="fs-5 text-warning" id="pressure"></div>
                     </div>
                     <div class="forecastBorder"></div>
                     <div class="forecast">
                         <p id="">Humidity</p>
                         <img src="./cloud.png" alt="" class="cloud">
-                        <div class="fs-3 fw-bold" id="">31⁰</div>
+                        <div class="fs-5 text-warning" id="humidity"></div>
                     </div>
                 </div>
             </div>
@@ -80,65 +101,73 @@
     </div> -->
     
     <div id="display"></div>  
-    <button onclick="getWeather()">Get Weather Details</button>
+    <!-- <button onclick="getWeather()">Get Weather Details</button> -->
 
 
     <script>
-        //.then()
-        let endpoint = "https://jsonplaceholder.typicode.com/users"
-        // const getData = async()=>{
-        //    let response =  await fetch(endpoint)
-        //    let convertedResponse = await response.json()
-        //    console.log(convertedResponse)
-        // }
-        //try and catch - ... Throw
-        const getData = ()=>{
-            
-            fetch(endpoint)
-            .then((response)=>response.json())
-            .then((convertedResponse)=>{
-                console.log(convertedResponse)
-                loadingDiv.innerHTML = ""
-                convertedResponse.map((eachItem)=>{
-                    display.innerHTML += `<h1>${eachItem.name}</h1>`
-                })
-            })
-            .catch((err)=>{
-                console.log(err)
-            })
+        const weather = async () => {
+            // alert("izz workin")
+                let APIkey = 'dfbe9e2443f7d15039258e895705c58f'
+                let endpoint = `https://api.openweathermap.org/data/2.5/weather?q=${userCity.value}&appid=${APIkey}`
+
+
+                let endpoint2 = await fetch(endpoint)
+                let server2 = await endpoint2.json()
+                console.log(server2)
+
+
+                let degs = Number(Math.round(server2.main.temp)) - 273
+                let city = server2.name
+                let cloud = server2.sys.country
+                let state = server2.weather[0].description
+                let whirlwind = server2.wind.speed
+                let humi = server2.main.humidity
+                let press = server2.main.pressure
+
+
+                console.log(press)
+                locate.innerHTML = `${city}`
+                temper.innerHTML = `${degs}<sup>oC</sup>`
+                descript.innerHTML = `${state} `
+                wind.innerHTML = `${whirlwind}m/s`
+                humidity.innerHTML = `${humi}%`
+                pressure.innerHTML = `${press} hPa`
+                temperature.innerHTML = `${degs}<sup>oC</sup>`
+                myLocationDisplay.innerHTML = ` <h2>${city} ${cloud}</h2>
+                                            <h5>${state}</h5> `
+
+
+
         }
-        let cityName = "Lagos"
-        let apiKey = "09756d60b2011a99fb389f6e43e766cc"
-        let endpoint2 = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=metric`
-        
-        const getWeather = ()=>{
-            fetch(endpoint2)
-            .then((response)=>response.json())
-            .then((convertedResponse)=>{
-                console.log(convertedResponse)
-            })
-        }
-       
-        const getLocation = ()=>{
-            loadingDiv.innerHTML = `<img src='loading.gif' class="gif"/>`
-            navigator.geolocation.getCurrentPosition((location)=>{
+
+              const getLocation = () => {
+
+            navigator.geolocation.getCurrentPosition((location) => {
+
+                let APIkey = 'dfbe9e2443f7d15039258e895705c58f'
                 console.log(location)
-                let latitude = location.coords.latitude
-                let longitude = location.coords.longitude
-                console.log(latitude,longitude)
+                let lat = location.coords.latitude
+                let long = location.coords.longitude
+                console.log(lat, long)
+                let thirdEndpoint = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${APIkey}`
 
+                fetch(thirdEndpoint)
+                    .then((response) => response.json())
+                    .then((convertedRes) => {
+                        console.log(convertedRes)
+                        myLocationDisplay.innerHTML  = `<h5 class="text-white">current Location:<br>
+                            ${convertedRes.name} ${Number(Math.round(convertedRes.main.temp)) - 273}<sup>o</sup>c
 
-                let endpoint3 = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}`
-                fetch(endpoint3)
-                .then((response)=>response.json())
-                .then((convertedResponse)=>{
-                    console.log(convertedResponse)
-                    myLocation.innerHTML = `<h1>${convertedResponse.name}</h1>`
-                    loadingDiv.innerHTML=""
-                })
+                        <div class="text-white">${convertedRes.weather[0].description}</div>`
+                    })
+
             })
-        };
 
+        }
+
+
+
+  
     </script>
     <script src="./all.js"></script>
     <script src="./bootstrap.bundle.js"></script>
