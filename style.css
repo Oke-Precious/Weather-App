@@ -87,7 +87,7 @@ body{
     
 }
 .cloud{
-    width: 150px;
+    width: 60%;
 }
 .forecast-Container{
     /* display: flex; */
@@ -112,6 +112,9 @@ body{
 }
 .sideNav div{
     margin-bottom: 20px;
+    width: 100%;
+}
+.lIcon{
     width: 100%;
 }
 .sideNav button{
@@ -144,5 +147,9 @@ body{
     .forecast-Container{
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
+        width: 100%;
+    }
+    .lIcon{
+        width: 60%;
     }
 }
