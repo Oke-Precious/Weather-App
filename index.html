@@ -10,8 +10,52 @@
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="./bootstrap.css">
 </head>
-<body class="" style="background:rgb(15, 13, 18) ;" onload="getLocation()">
-    <section class="parent d-flex gap-3">
+<body class="" style="background:rgb(15, 13, 18) ;" id="bodyDisp" onload="getLocation()">
+    <div class="loadingDiv">
+        <div id="loadingDiv" class="text-light"></div>
+    </div>
+    
+
+
+
+    <script>
+        loadingDiv.innerHTML=`<img src="loading.gif" alt="">`;
+        const weather = async () => {
+         
+                let APIkey = 'dfbe9e2443f7d15039258e895705c58f'
+                let endpoint = `https://api.openweathermap.org/data/2.5/weather?q=${userCity.value}&appid=${APIkey}`
+
+
+                let endpoint2 = await fetch(endpoint)
+                let server2 = await endpoint2.json()
+                console.log(server2)
+
+
+                let degs = Number(Math.round(server2.main.temp)) - 273
+                let city = server2.name
+                let cloud = server2.sys.country
+                let state = server2.weather[0].description
+                let whirlwind = server2.wind.speed
+                let humi = server2.main.humidity
+                let press = server2.main.pressure
+
+
+                console.log(press)
+                locate.innerHTML = `${city}`
+                temper.innerHTML = `${degs}<sup>oC</sup>`
+                descript.innerHTML = `${state} `
+                wind.innerHTML = `${whirlwind}m/s`
+                humidity.innerHTML = `${humi}%`
+                pressure.innerHTML = `${press} hPa`
+                temperature.innerHTML = `${degs}<sup>oC</sup>`
+                myLocationDisplay.innerHTML = ` <h2>${city} ${cloud}</h2>
+                                            <h5>${state}</h5> `
+
+        }
+
+              const getLocation = () => {
+                bodyDisp.innerHTML=`
+                <section class="parent d-flex gap-3">
         
         
         <div>
@@ -95,52 +139,8 @@
                 </div>
             </div>
         </div>
-    </section>
-    <!-- <div class="loadingDiv">
-        <div id="loadingDiv" class=""></div>
-    </div> -->
-    
-    <div id="display"></div>  
-    <!-- <button onclick="getWeather()">Get Weather Details</button> -->
-
-
-    <script>
-        const weather = async () => {
-            // alert("izz workin")
-                let APIkey = 'dfbe9e2443f7d15039258e895705c58f'
-                let endpoint = `https://api.openweathermap.org/data/2.5/weather?q=${userCity.value}&appid=${APIkey}`
-
-
-                let endpoint2 = await fetch(endpoint)
-                let server2 = await endpoint2.json()
-                console.log(server2)
-
-
-                let degs = Number(Math.round(server2.main.temp)) - 273
-                let city = server2.name
-                let cloud = server2.sys.country
-                let state = server2.weather[0].description
-                let whirlwind = server2.wind.speed
-                let humi = server2.main.humidity
-                let press = server2.main.pressure
-
-
-                console.log(press)
-                locate.innerHTML = `${city}`
-                temper.innerHTML = `${degs}<sup>oC</sup>`
-                descript.innerHTML = `${state} `
-                wind.innerHTML = `${whirlwind}m/s`
-                humidity.innerHTML = `${humi}%`
-                pressure.innerHTML = `${press} hPa`
-                temperature.innerHTML = `${degs}<sup>oC</sup>`
-                myLocationDisplay.innerHTML = ` <h2>${city} ${cloud}</h2>
-                                            <h5>${state}</h5> `
-
-
-
-        }
-
-              const getLocation = () => {
+    </section>                
+                `
 
             navigator.geolocation.getCurrentPosition((location) => {
 
@@ -162,10 +162,11 @@
                     })
 
             })
+            
 
-        }
-
-
+        };
+        loadingDiv.innerHTML="";
+        
 
   
     </script>
